@@ -1,6 +1,5 @@
 import pathlib
 from typing import List, Tuple, Union
-import cairosvg
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 from src.lib.io import get_external_images
@@ -14,18 +13,6 @@ __current_file_path__ = pathlib.Path(__file__).resolve()
 __current_dir__ = __current_file_path__.parent
 
 logger = setup_logger(__name__)
-
-def svg_to_png_buffer(svg_content: str):
-   """
-    Converts an SVG string to a PNG buffer.
-   """
-   png_buffer = BytesIO()
-
-   # Convert SVG to PNG and store in the buffer
-   cairosvg.svg2png(bytestring=svg_content.encode('utf-8'), write_to=png_buffer,
-                    background_color="white")
-
-   return png_buffer
 
 class ImageComponent:
   EXTERNAL_IMAGE = "external"
