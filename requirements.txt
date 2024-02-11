@@ -1,0 +1,8 @@
+requests==2.31.0
+Flask==3.0.1
+python-dotenv==1.0.1
+gunicorn==21.2.0
+pillow==10.2.0
+hiredis==2.3.2
+ruff==0.2.1
+CairoSVG==2.7.1
