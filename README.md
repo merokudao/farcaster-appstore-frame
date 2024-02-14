@@ -31,7 +31,7 @@ following env variables that are needed by PyCaster.
 
 | Var  | Required  | Description  |
 |:----------|:----------|:----------|
-| NEYNAR_API_KEY    | Yes    | Used to perform various crucial calls related to user.    |
+| NEYNAR_API_KEY    | Recommended    | Used to perform various crucial calls related to user. If your app does user related functions (ex: check if the user follows a channel or has casted something), this will be needed.   |
 | REDIS_HOST    | Yes    | Highly recommended to increase speed of frame response. Without this, the `pycaster` lib has to be changed significantly to bypass.   |
 | MEROKU_API_KEY    | Optional    | Required if you're building on Meroku dApp Store Kit APIs    |
 | OPENAI_API_KEY    | Optional    | Required if you're using OpenAI    |
