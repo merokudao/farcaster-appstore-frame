@@ -12,7 +12,11 @@ app_url = os.getenv("APP_URL", "testroast.ngrok.app")
 
 def setup_logger(name):
     logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
+    log_level = os.getenv("LOG_LEVEL")
+    if log_level:
+        logger.setLevel(log_level)
+    else:
+      logger.setLevel(logging.INFO if prod else logging.DEBUG)
     handler = logging.StreamHandler()
     handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
     logger.addHandler(handler)

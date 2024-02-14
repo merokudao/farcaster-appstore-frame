@@ -4,10 +4,16 @@ from flask import Flask, render_template, request, redirect, send_file, url_for
 
 from pycaster.lib.image import ImageComponent, generate_app_image
 from pycaster.lib.meroku import get_apps
+from pycaster.lib.middleware import check_trusted_data
 from pycaster.lib.utils import app_url
 
 app = Flask(__name__, template_folder='pycaster/templates')
 app.logger.setLevel('DEBUG')
+
+@app.before_request
+def before_request():
+  if not check_trusted_data():
+    return "Request Unauthorized", 403
 
 @app.route('/')
 def index():
