@@ -71,24 +71,26 @@ def get_external_image(url):
     # Use the URL as the key to check in Redis
     cache_key = f"pfp:test1:{url}"
     cached_image = r.get(cache_key)
+    logger.debug(f"Cache key: {cache_key}, Cached image: {cached_image}")
 
     if cached_image:
         # current_app.logger.debug("Returning from cache")
         # If found in cache, decode and load the image
         img_data = base64.b64decode(cached_image)
         img = Image.open(BytesIO(img_data))
+        logger.debug(f"Image from cache. format: {img.format}")
     else:
         # If not found in cache, fetch the image, cache it, and return
         response = requests.get(url)
         img = Image.open(BytesIO(response.content))
-        print(f"Image format: {img.format}")
+        logger.debug(f"Image from url. format: {img.format}")
         if img.format == 'JPEG':
           img_png = img.convert("RGBA")
           buffered_png = BytesIO()
           img_png.save(buffered_png, format="PNG")
           img = Image.open(BytesIO(buffered_png.getvalue()))
 
-        print(f"Converted Image format: {img.format}")
+        logger.debug(f"Converted Image format: {img.format}")
 
         # Serialize and store the image in Redis
         buffered = BytesIO()

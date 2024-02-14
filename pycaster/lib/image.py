@@ -236,7 +236,7 @@ def generate_app_image(components: List[ImageComponent]) -> Image.Image:
 
   base_image = Image.open(base_image_path.absolute())
   base_width, base_height = base_image.size
-  print(base_height, base_width)
+  logger.info(f"Base image size: {base_width}x{base_height}")
 
   # First fetch any external images in parallel
   external_images = get_external_images(
