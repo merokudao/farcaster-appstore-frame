@@ -6,6 +6,10 @@ import logging
 __current_file_path__ = pathlib.Path(__file__).resolve()
 __current_dir__ = __current_file_path__.parent
 
+prod = os.getenv("ENV") == "prod"
+stag = os.getenv("ENV") == "staging"
+app_url = os.getenv("APP_URL", "testroast.ngrok.app")
+
 def setup_logger(name):
     logger = logging.getLogger(name)
     logger.setLevel(logging.INFO)
@@ -22,8 +26,3 @@ def get_numeric_env_var(env_var_name, default_value):
     # If conversion fails, return the default value
     return default_value
 
-prod = os.getenv("ENV") == "prod"
-app_url = os.getenv("APP_URL", "testroast.ngrok.app")
-
-if prod:
-  app_url = "roast.dappstore.app"
