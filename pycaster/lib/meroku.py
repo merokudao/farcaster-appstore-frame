@@ -2,9 +2,9 @@ import http.client
 import json
 import os
 
-from pycaster.lib.utils import get_logger
+from pycaster.lib.utils import setup_logger
 
-logger = get_logger(__name__)
+logger = setup_logger(__name__)
 
 def get_apps():
   conn = http.client.HTTPSConnection("api.meroku.store")
