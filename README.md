@@ -37,7 +37,6 @@ following env variables that are needed by PyCaster.
 | OPENAI_API_KEY    | Optional    | Required if you're using OpenAI    |
 | AWS_ACCESS_KEY_ID    | Optional    | If your frame needs to upload media to S3, this is needed.    |
 | AWS_SECRET_ACCESS_KEY    | Optional    | If your frame needs to upload media to S3, this is needed.    |
-| Cell 1    | Cell 2    | Cell 3    |
 
 
 Create your own `.env` by copying from `.env.example`.
@@ -46,7 +45,7 @@ Create your own `.env` by copying from `.env.example`.
 cp .env.example .env
 ```
 
-Set env variables in terminal by 
+Set env variables in terminal by
 
 ```shell
 set -a; source .env; set +a
@@ -56,7 +55,7 @@ set -a; source .env; set +a
 
 ### Local
 
-RUN using 
+RUN using
 
 ```shell
 flask run --host 0.0.0.0 --port 9091
@@ -67,11 +66,11 @@ flask run --host 0.0.0.0 --port 9091
 
 #### Build
 
-`docker build -t roastme .`
+`docker build -t pycasterdemo .`
 
 #### Run
 
-`docker run -p 9091:5000 --env-file .env roastme`
+`docker run -p 9091:5000 --env-file .env pycasterdemo`
 
 ## Check
 
