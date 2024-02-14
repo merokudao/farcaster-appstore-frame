@@ -2,9 +2,9 @@ import random
 from urllib.parse import quote
 from flask import Flask, render_template, request, redirect, send_file, url_for
 
-from src.lib.image import ImageComponent, generate_app_image
-from src.lib.meroku import get_apps
-from src.lib.utils import app_url
+from pycaster.lib.image import ImageComponent, generate_app_image
+from pycaster.lib.meroku import get_apps
+from pycaster.lib.utils import app_url
 
 app = Flask(__name__, template_folder='src/templates')
 app.logger.setLevel('DEBUG')

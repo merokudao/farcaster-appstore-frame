@@ -6,8 +6,8 @@ import requests
 import json
 from urllib.parse import quote
 
-from src.lib.utils import setup_logger
-from src.lib.io import r
+from pycaster.lib.utils import setup_logger
+from pycaster.lib.io import r
 
 
 __current_file_path__ = pathlib.Path(__file__).resolve()

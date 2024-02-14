@@ -2,7 +2,7 @@ import pathlib
 from typing import List, Tuple, Union
 from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
-from src.lib.io import get_external_images
+from pycaster.lib.io import get_external_images
 
 from .utils import setup_logger
 from xml.etree.ElementTree import Element, tostring
