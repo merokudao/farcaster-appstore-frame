@@ -184,3 +184,24 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'),
                 password=os.getenv('REDIS_PASSWORD', None),
                 db=0,
                 protocol=3)
+
+def validate_message_hub(message_bytes: str):
+  logger.debug(f"Validating message: {message_bytes}")
+  url = "https://api.neynar.com:2281/v1/validateMessage"
+  headers = {
+    "Content-Type": "application/octet-stream",
+    "api_key": os.getenv("NEYNAR_API_KEY")
+  }
+  response = requests.post(url, headers=headers, data=message_bytes)
+
+  if response.status_code == 200:
+    response = response.json()
+    logger.debug(f"Validated message: {response}")
+    return response
+  else:
+    logger.info(f"Error validating message: {response.text}")
+    return {
+      "status": False,
+      "server_code": response.status_code,
+      "error": response.text
+    }
