@@ -6,7 +6,7 @@ from pycaster.lib.image import ImageComponent, generate_app_image
 from pycaster.lib.meroku import get_apps
 from pycaster.lib.utils import app_url
 
-app = Flask(__name__, template_folder='src/templates')
+app = Flask(__name__, template_folder='pycaster/templates')
 app.logger.setLevel('DEBUG')
 
 @app.route('/')
