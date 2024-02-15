@@ -31,3 +31,30 @@ def get_apps():
   data = json.loads(data)["data"]
   r.set(cache_key, json.dumps(data), ex=60*60*12)
   return data
+
+def rate_app(appId: str, rating: int, fid: int):
+  conn = http.client.HTTPSConnection("api.meroku.store")
+  payload = {
+    "dappId": appId,
+    "rating": rating,
+    "comment": "",
+    "userId": f"fid:{ fid }",
+    "userAddress": "",
+    "version": ""
+  }
+
+  headers = {
+      'Content-Type': "application/json",
+      'Accept': "application/json",
+      'apikey': os.getenv("MEROKU_API_KEY")
+  }
+
+  conn.request("POST", "/api/v1/dapp/rate", json.dumps(payload), headers)
+
+  res = conn.getresponse()
+  if res.status != 200:
+    return []
+
+  data = res.read()
+  data = json.loads(data)
+  return data
