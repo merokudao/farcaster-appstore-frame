@@ -231,8 +231,10 @@ def insert_profile_picture(base: Image.Image, profile_img: Image.Image,
 
     return base
 
-def generate_app_image(components: List[ImageComponent]) -> Image.Image:
-  base_image_path = __current_dir__ / "background.png"
+def generate_app_image(components: List[ImageComponent],
+                       base_image_path: pathlib.Path = None) -> Image.Image:
+  if base_image_path is None:
+    base_image_path = __current_dir__ / "background.png"
 
   base_image = Image.open(base_image_path.absolute())
   base_width, base_height = base_image.size

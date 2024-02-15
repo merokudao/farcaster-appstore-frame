@@ -1,3 +1,4 @@
+from pathlib import Path
 import random
 from urllib.parse import quote
 from flask import Flask, render_template, request, redirect, send_file, url_for
@@ -6,6 +7,9 @@ from pycaster.lib.image import ImageComponent, generate_app_image
 from pycaster.lib.meroku import get_apps, rate_app
 from pycaster.lib.middleware import check_trusted_data
 from pycaster.lib.utils import app_url, setup_logger
+
+__current_file_path__ = Path(__file__).resolve()
+__current_dir__ = __current_file_path__.parent
 
 app = Flask(__name__, template_folder='pycaster/templates')
 app.logger = setup_logger(__name__)
@@ -142,6 +146,57 @@ def frame_image(app_id):
 
   img.seek(0)
   return send_file(img, mimetype='image/png')
+
+@app.route('/image/<view_type>/<app_id>')
+def image(view_type: str, app_id: str):
+  if view_type not in ['pre_rate', 'post_rate']:
+    return "Invalid view type", 400
+
+  apps = get_apps()
+  apps = filter(lambda x: x['dappId'] == app_id, apps)
+  _app = next(apps, None)
+
+  app.logger.info(_app['images'])
+
+  image_stack = []
+
+
+
+  if view_type == 'pre_rate':
+    app_logo = ImageComponent(
+      ImageComponent.EXTERNAL_IMAGE,
+      position=(140, 120),
+      external_img_url=_app['images']['logo'],
+      display_type=ImageComponent.DISPLAY_TYPE_CIRCLE,
+      circle_radius=60
+    )
+    image_stack.append(app_logo)
+    app_name = ImageComponent(
+      ImageComponent.TEXT,
+      position=(80, 80),
+      text=f"Rate {_app['name']}",
+      font_size=54,
+      font_color=(0, 0, 0)
+    )
+    image_stack.append(app_name)
+    base_image_path = __current_dir__ / "Pre_Rating.png"
+  else:
+    app_name = ImageComponent(
+      ImageComponent.TEXT,
+      position=(100, 80),
+      text=f"Thanks for rating {_app['name']}",
+      font_size=50,
+      font_color=(0, 0, 0)
+    )
+    image_stack.append(app_name)
+
+    base_image_path = __current_dir__ / "Ratings_Thanks.png"
+
+  img = generate_app_image(image_stack, base_image_path)
+
+  img.seek(0)
+  return send_file(img, mimetype='image/png')
+
 
 @app.route('/redirect/<app_id>')
 def redirect_url(app_id: str):
