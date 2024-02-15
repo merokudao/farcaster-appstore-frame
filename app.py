@@ -136,7 +136,7 @@ def frame_image(app_id):
   _text = f"{_app['description']}"
   description = ImageComponent(
     ImageComponent.TEXT,
-    position=(0, 200),
+    position=(0, 150),
     text=_text,
     font_size=30,
     font_color=(0, 0, 0)
