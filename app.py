@@ -126,17 +126,18 @@ def frame_image(app_id):
 
   app_name = ImageComponent(
     ImageComponent.TEXT,
-    position=(120, 0),
+    position=(120, 80),
     text=_app['name'],
-    font_size=40,
-    font_color=(128, 128, 128)
+    font_size=42,
+    font_color=(140, 82, 255)
   )
   image_stack.append(app_name)
 
+  _text = f"{_app['description']}"
   description = ImageComponent(
     ImageComponent.TEXT,
     position=(0, 200),
-    text=_app['description'],
+    text=_text,
     font_size=30,
     font_color=(0, 0, 0)
   )
