@@ -3,10 +3,16 @@ import json
 import os
 
 from pycaster.lib.utils import setup_logger
+from pycaster.lib.io import r
 
 logger = setup_logger(__name__)
 
 def get_apps():
+  cache_key = "farcaster:apps"
+  cached_val = r.get(cache_key)
+  if cached_val:
+    return json.loads(cached_val)
+
   conn = http.client.HTTPSConnection("api.meroku.store")
 
   headers = {
@@ -23,4 +29,5 @@ def get_apps():
 
   data = res.read()
   data = json.loads(data)["data"]
+  r.set(cache_key, json.dumps(data), ex=60*60*12)
   return data
