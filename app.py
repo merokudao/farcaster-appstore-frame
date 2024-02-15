@@ -44,7 +44,7 @@ def action(app_id: str):
     redirect_url = f"https://api.meroku.store/api/v1/o/view/{ app_id }?userId={ user_id }"
     return redirect(redirect_url, 302)
   elif buttonIndex == 3:
-    image_url = "https://d7aseyv2y654x.cloudfront.net/pycaster-demo/assets/Pre_Rating.png"
+    image_url = f"https://{ app_url }{ url_for('image', view_type='pre_rate', app_id=app_id) }"
     post_url = f"https://{ app_url }{ url_for('rate', app_id=app_id) }"
     return render_template('rate.html', image_url=image_url, post_url=post_url)
   elif buttonIndex == 4:
@@ -65,7 +65,7 @@ def rate(app_id: str):
   else:
     rating = 3
   rate_app(app_id, rating, untrusted_data['fid'])
-  img_url = "https://d7aseyv2y654x.cloudfront.net/pycaster-demo/assets/Ratings_Thanks.png"
+  img_url = f"https://{ app_url }{ url_for('image', view_type='post_rate', app_id=app_id) }"
   next_url = f"https://{ app_url }{ url_for('thanks', app_id=app_id) }"
   return render_template('thanks.html', image_url=img_url, post_url=next_url)
 
@@ -159,8 +159,6 @@ def image(view_type: str, app_id: str):
   app.logger.info(_app['images'])
 
   image_stack = []
-
-
 
   if view_type == 'pre_rate':
     app_logo = ImageComponent(
