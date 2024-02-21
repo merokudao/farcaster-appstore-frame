@@ -71,7 +71,7 @@ def get_external_image(url):
     # Use the URL as the key to check in Redis
     cache_key = f"pfp:test1:{url}"
     cached_image = r.get(cache_key)
-    logger.debug(f"Cache key: {cache_key}, Cached image: {cached_image}")
+    # logger.debug(f"Cache key: {cache_key}, Cached image: {cached_image}")
 
     if cached_image:
         # current_app.logger.debug("Returning from cache")
