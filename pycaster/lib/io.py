@@ -193,6 +193,7 @@ def validate_message_hub(message_bytes: str):
     "api_key": os.getenv("NEYNAR_API_KEY")
   }
   response = requests.post(url, headers=headers, data=message_bytes)
+  logger.debug(f"Got message from hub: {response.text}")
 
   if response.status_code == 200:
     response = response.json()

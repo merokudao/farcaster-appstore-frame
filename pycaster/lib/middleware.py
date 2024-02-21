@@ -23,14 +23,13 @@ def get_users_details_in_background(user_id: int):
 def validate_request(data):
     if 'trustedData' in data and 'messageBytes' in data['trustedData']:
         validate_response = validate_message_hub(bytes.fromhex(data['trustedData']['messageBytes']))
-        if validate_response['valid']:
+        if 'valid' in validate_response and validate_response['valid']:
             _msg_data = validate_response['message']['data']
             logger.debug(f"Validated message: {_msg_data}")
             if _msg_data['fid'] == data['untrustedData']['fid']:
                 return True
             return True
-    else:
-        return False
+    return False
 
 def check_trusted_data():
     # Only apply the check to POST requests
