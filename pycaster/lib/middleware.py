@@ -21,9 +21,6 @@ def get_users_details_in_background(user_id: int):
         logger.error(f"Error fetching user data: {e}")
 
 def validate_request(data):
-    return True
-    # temp disabling check due to neynar error
-    # https://warpcast.com/pranav/0x0e31451b
     if 'trustedData' in data and 'messageBytes' in data['trustedData']:
         validate_response = validate_message_hub(bytes.fromhex(data['trustedData']['messageBytes']))
         if 'valid' in validate_response and validate_response['valid']:
