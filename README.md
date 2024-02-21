@@ -3,6 +3,10 @@
 PyCaster is a python lib that makes it easy to build apps on Farcaster. It can be
 used to create Farcaster Frames. This boilerplate provides a demo of it's usage.
 
+Using PyCaster to build your frames backend is easy. I wrote a blog post about it at [https://pranavprakash.in/2024/02/12/building-a-farcaster-frame-in-python-with-flask/](https://pranavprakash.in/2024/02/12/building-a-farcaster-frame-in-python-with-flask/)
+
+If you have any questions, open an issue in this repo or [cast to me on Farcaster](https://warpcast.com/pranav)
+
 # Getting Started
 
 ## Install
@@ -75,13 +79,6 @@ flask run --host 0.0.0.0 --port 9091
 ## Check
 
 `ruff .`
-
-# Development
-
-Using PyCaster to build your frames backend is easy. I wrote a blog post about it at [https://pranavprakash.in/2024/02/12/building-a-farcaster-frame-in-python-with-flask/](https://pranavprakash.in/2024/02/12/building-a-farcaster-frame-in-python-with-flask/)
-
-If you have any questions, open an issue in this repo or [cast to me on Farcaster](https://warpcast.com/pranav)
-
 # Contributing
 
 We'd love to accept contriutions. Please open an issue with what you'd like to build and we'll discuss and take it from there.
